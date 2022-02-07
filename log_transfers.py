@@ -12,7 +12,10 @@ import sqlite3
 
 sqle = sqlite3.connect('torrent_transfer_log.sqlite')
 
-qbt_client = qbittorrentapi.Client(host='localhost:8080', username='admin', password='adminadmin')
+with open('config.json') as f:
+    config = json.load(f)
+
+qbt_client = qbittorrentapi.Client(**config['qbt_connect_args'])
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
